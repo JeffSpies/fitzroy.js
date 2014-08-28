@@ -1,0 +1,56 @@
+{
+  "name": "FitzRoy.js",
+  "version": "0.0.1",
+  "description": "A History.js based JavaScript router using Finch.js for making single-page websites",
+  "keywords": [
+    "history",
+    "finch",
+    "router"
+  ],
+  "main": "index.js",
+  "license": "A",
+  "author": "Jeffrey Spies (https://github.com/jeffspies)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JeffSpies/fitzroy.js.git"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "browser": {
+    "finch": "./bower_components/finchjs/finch.js",
+    "jquery": "./bower_components/jquery/dist/jquery.js",
+    "history": "./bower_components/history.js/scripts/bundled/html4+html5/native.history.js"
+  },
+  "browserify-shim": {
+    "finch": "Finch",
+    "jquery": "$",
+    "history": "History"
+  },
+  "dependencies": {
+    "browserify": "^5.10.1",
+    "browserify-shim": "^3.7.0",
+    "coffee-script": "*",
+    "event-stream": "*",
+    "gulp": "^3.8.7",
+    "gulp-concat": "^2.3.4",
+    "gulp-header": "^1.0.5",
+    "gulp-livereload": "^2.1.1",
+    "gulp-uglify": "^0.3.2",
+    "gulp-wrap-define": "*",
+    "vinyl-source-stream": "^0.1.1",
+    "watchify": "^1.0.2"
+  },
+  "bugs": {
+    "url": "https://github.com/JeffSpies/fitzroy.js/issues"
+  },
+  "homepage": "https://github.com/JeffSpies/fitzroy.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

@@ -1,0 +1,16 @@
+<html>
+<head>
+<script src="bundle.js"></script>
+</head>
+<body>
+
+<script>
+    var router = FitzRoy();
+    router.base = '/';
+    var index = function(){
+        alert('hi');
+    };
+    router.add('/', index, {});
+</script>
+</body>
+</html>
