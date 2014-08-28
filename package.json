@@ -20,12 +20,15 @@
   "browser": {
     "finch": "./bower_components/finchjs/finch.js",
     "jquery": "./bower_components/jquery/dist/jquery.js",
-    "history": "./bower_components/history.js/scripts/bundled/html4+html5/native.history.js"
+    "history": "./bower_components/history.js/scripts/bundled-uncompressed/html4+html5/native.history.js"
   },
   "browserify-shim": {
     "finch": "Finch",
     "jquery": "$",
     "history": "History"
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
   },
   "dependencies": {
     "browserify": "^5.10.1",
