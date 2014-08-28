@@ -1,6 +1,7 @@
 /**
- ** <APP NAME>
+ ** FitzRoy.js
  ** @author jeffspies
+ ** @author caneruguz
  **/
 var finch = require("finch");
 var History = require("history");
@@ -40,7 +41,12 @@ var FitzRoy = FitzRoy || function(){
      finch.call(route);
  };
  FitzRoy.prototype.add = function(route, fn, context){
-     route = this.base + route;
+     var base = this.base;
+     if(route.substring(0, 1)==='['){
+         route = route.substring(1, route.length);
+         base = '[' + base;
+     }
+     route = base + route;
      console.log(route);
      finch.route(route, function(){
          fn.call(context);

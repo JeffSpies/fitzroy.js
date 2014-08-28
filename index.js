@@ -1,3 +1,5 @@
+# Some of this from https://github.com/browserstate/ajaxify
+
 var finch = require("finch");
 var History = require("history");
 var $ = require("jquery");
@@ -36,8 +38,12 @@ var FitzRoy = FitzRoy || function(){
      finch.call(route);
  };
  FitzRoy.prototype.add = function(route, fn, context){
-     route = this.base + route;
-     console.log(route);
+     var base = this.base;
+     if(route.substring(0, 1)==='['){
+         route = route.substring(1, route.length);
+         base = '[' + base;
+     }
+     route = base + route;
      finch.route(route, function(){
          fn.call(context);
      });
