@@ -3,27 +3,27 @@ var History = require("history");
 var $ = require("jquery");
 
 var FitzRoy = FitzRoy || function(){
-         var routes = [],
-             mapping = {},
-             base = '',
-             init = function(){
-                 $.expr[':'].external = function (a) {
-                     var PATTERN_FOR_EXTERNAL_URLS = /^\w+:\/\//;
-                     var href = $(a).attr('href');
-                     return href !== undefined &&
-                         href.search(PATTERN_FOR_EXTERNAL_URLS) !== -1;
-                 };
-                 $.expr[':'].internal = function (a) {
-                     return $(a).attr('href') !== undefined && !$.expr[':'].external(a);
-                 };
+    var routes = [],
+        mapping = {},
+        base = '',
+        init = function(){
+            $.expr[':'].external = function (a) {
+                var PATTERN_FOR_EXTERNAL_URLS = /^\w+:\/\//;
+                var href = $(a).attr('href');
+                return href !== undefined &&
+                    href.search(PATTERN_FOR_EXTERNAL_URLS) !== -1;
+            };
+            $.expr[':'].internal = function (a) {
+                return $(a).attr('href') !== undefined && !$.expr[':'].external(a);
+            };
 
-                 History.options.debug = false;
+            History.options.debug = false;
 
-                 History.Adapter.bind(window,'statechange',function(){
-                     finch.call(History.getState().hash);
-                 });
-             };
-         init();
+            History.Adapter.bind(window,'statechange',function(){
+                finch.call(History.getState().hash);
+            });
+        };
+    init();
 };
 
  FitzRoy.prototype.getHash = function(){
@@ -37,6 +37,7 @@ var FitzRoy = FitzRoy || function(){
  };
  FitzRoy.prototype.add = function(route, fn, context){
      route = this.base + route;
+     console.log(route);
      finch.route(route, function(){
          fn.call(context);
      });

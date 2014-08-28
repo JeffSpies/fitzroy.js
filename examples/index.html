@@ -5,13 +5,29 @@
 <body>
 
 <h2> It's Alive! </h2>
+<a href="/project/file">test</a>
 <script>
     var router = new FitzRoy();
-    router.base = '/';
+    router.base = '/examples';
     var index = function(){
         alert('hi');
     };
+
+    var project = function(){
+        alert('project');
+    };
+    var file = function(){
+        alert('file');
+    };
+
     router.add('/', index, {});
+    router.add('/project', project, {});
+    router.add('[/project]/file', file, {});
+
+    $(document).ready(function(){
+        router.ajaxify(window.document.body);
+        router.call(router.getHash());
+    });
 </script>
 </body>
 </html>
