@@ -18,10 +18,10 @@ var banner = [
     ''
 ].join('\n');
 
-var build = false;
-
+//var build = false;
+//
 var paths = {
-    jsfiles: ['index.js']
+    js: ['./index.js']
 };
 
 //gulp.task('browserify-app', function() {
@@ -63,8 +63,8 @@ var paths = {
 //});
 
 /* Scripts */
-gulp.task('js', function () {
-    var bundleStream = browserify('./index.js', {standalone: 'FitzRoy'}).bundle();
+gulp.task('example', function () {
+    var bundleStream = browserify(paths.js, {standalone: 'FitzRoy', debug : true }).bundle();
     bundleStream
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./examples/'))
@@ -72,35 +72,27 @@ gulp.task('js', function () {
 
 // Using gulp.src piped to brwoserfiy and bundled did not work
 
-//gulp.task('dist_full', function () {
-//    gulp.src('.tmp/scripts/index.js')
-//        .pipe(concat('fitzroy.js'))
-//        .pipe(header(banner))
-//        .pipe(gulp.dest('./dist/'))
-//        .pipe(livereload());
-//});
-//
-//gulp.task('dist_min', function () {
-//    gulp.src('.tmp/scripts/index.js')
-//        .pipe(concat('fitzroy.min.js'))
-//        .pipe(header(banner))
-//        .pipe(gulp.dest('./dist/'))
-//        .pipe(livereload());
-//});
+gulp.task('dist_full', function () {
+    gulp.src(paths.js)
+        .pipe(concat('fitzroy.js'))
+        .pipe(header(banner))
+        .pipe(gulp.dest('./dist/'))
+});
 
-//gulp.task('scripts', ['browserify-app', 'js']);
+gulp.task('dist_min', function () {
+    gulp.src(paths.js)
+        .pipe(uglify())
+        .pipe(concat('fitzroy.min.js'))
+        .pipe(header(banner))
+        .pipe(gulp.dest('./dist/'))
+});
 
 
 /* Watch task */
-//gulp.task('watch', function () {
-//    gulp.watch('index.js', ['scripts']);
-//});
-///* Build task */
-//gulp.task('build', function () {
-//    build = true;
-//    dest = 'build';
-//
-//    gulp.start('scripts');
-//});
+gulp.task('watch', function () {
+    gulp.watch([paths.js, './examples/index.html'], ['example', 'dist_min', 'dist_full']);
+});
+
+
 /* Default task */
-gulp.task('default', ['js']);
+gulp.task('default', ['example', 'dist_min', 'dist_full', 'watch']);

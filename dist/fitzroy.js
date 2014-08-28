@@ -1,3 +1,7 @@
+/**
+ ** <APP NAME>
+ ** @author jeffspies
+ **/
 var finch = require("finch");
 var History = require("history");
 var $ = require("jquery");
