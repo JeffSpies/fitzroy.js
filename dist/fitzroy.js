@@ -3,6 +3,8 @@
  ** @author jeffspies
  ** @author caneruguz
  **/
+// Some of this from https://github.com/browserstate/ajaxify
+
 var finch = require("finch");
 var History = require("history");
 var $ = require("jquery");
@@ -47,16 +49,16 @@ var FitzRoy = FitzRoy || function(){
          base = '[' + base;
      }
      route = base + route;
-     console.log(route);
-     finch.route(route, function(){
-         fn.call(context);
+     finch.route(route, function(bindings){
+         fn.call(context, bindings);
      });
  };
  FitzRoy.prototype.ajaxify = function(el){
      if(!(el instanceof $)){
          el = $(el);
      }
-     el.find('a:internal:not(.no-ajax)').off('click').on('click',
+     var selector = 'a:internal:not(.no-ajax)';
+    $(el).off('click', selector).on('click',selector,
          function(event){
              // Prepare
              var $this = $(this),

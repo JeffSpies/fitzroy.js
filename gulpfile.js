@@ -24,7 +24,7 @@ var paths = {
 };
 
 gulp.task('webserver', function(){
-    gulp.src('./examples')
+    gulp.src('./example')
         .pipe(webserver({
             livereload: true,
             directoryListing: false,
@@ -37,7 +37,7 @@ gulp.task('example', function () {
     var bundleStream = browserify(paths.js, {standalone: 'FitzRoy', debug : true }).bundle();
     bundleStream
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./examples/'))
+        .pipe(gulp.dest('./example/'))
 });
 
 gulp.task('dist_full', function () {
@@ -58,9 +58,9 @@ gulp.task('dist_min', function () {
 
 /* Watch task */
 gulp.task('watch', function () {
-    gulp.watch([paths.js, './examples/index.html'], ['example', 'dist_min', 'dist_full']);
+    gulp.watch([paths.js, './example/index.html'], ['example', 'dist_min', 'dist_full']);
 });
 
 
 /* Default task */
-gulp.task('default', ['example', 'dist_min', 'dist_full', 'webserver']);
+gulp.task('default', ['example', 'dist_min', 'dist_full', 'webserver', 'watch']);
