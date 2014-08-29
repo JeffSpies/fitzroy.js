@@ -3,6 +3,12 @@ FitzRoy.js
 
 A History.js based JavaScript router using Finch.js for making single-page websites
 
+NOTE
+----
+
+1. This library is in alpha stage of development/testing. Do not trust the interface.
+2. This library will likely be moved to github.com/CenterForOpenScience; GH should forward, but beware should you get an error at the git command line.
+
 Why is this library named FitzRoy?
 ----------------------------------
 
