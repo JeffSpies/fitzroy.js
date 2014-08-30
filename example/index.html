@@ -1,0 +1,103 @@
+<html>
+<head>
+<script src="bundle.js"></script>
+    <style>
+        .wrapper {
+            width: 800px;
+            margin: 100px auto;
+        }
+        .button {
+            border: 1px solid;
+            padding: 5px 20px;
+            background: #eee;
+            font-size: 16px;
+            display: inline-block;
+        }
+        .button:hover {
+            background: #a9d9ee;
+        }
+        #bread {
+            color: #666;
+        }
+        #bread li {
+            list-style: none;
+            display: inline;
+        }
+        .crumb:before {
+            content : ">";
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h2 id="pageTitle"> </h2>
+    <p> Click links below to try routing. </p>
+    <ul id="bread">
+        <li> You are here: </li>
+        <li class="crumb"><a href="/">Home</a></li>
+    </ul>
+    <div class="button"> <a href="/project/file">File Page</a></div>
+    <div class="button"> <a href="/project/file/42">Parameter</a></div>
+
+</div>
+
+<script>
+    var router = new FitzRoy();
+    router.base = '';
+    var crumbList = [{
+        title : "Home",
+        url : "/"
+    }];
+    var crumbHtml = function(){
+        var html = "";
+        crumbList.map(function(crumb){
+            html += "<li class='crumb'> <a href='"+crumb.url+"'>"+crumb.title+"</a></li>";
+        });
+        return html;
+    };
+    var index = function(){
+        crumbList.splice(1,crumbList.length-1);
+        document.getElementById('pageTitle').innerText = "Welcome Home";
+        document.getElementById('bread').innerHTML =  crumbHtml();
+    };
+    var project = function(){
+        document.getElementById('pageTitle').innerText = "Project Page";
+        crumbList.splice(1,crumbList.length-1);
+        crumbList.push({ title : "Project Page", url : "/project" });
+        document.getElementById('bread').innerHTML =  crumbHtml();
+    };
+    var file = function(){
+        crumbList.splice(2,crumbList.length-2);
+        document.getElementById('pageTitle').innerText = "File Page";
+        crumbList.push({ title : "File Page", url : "/project/file" });
+        document.getElementById('bread').innerHTML =  crumbHtml();
+    };
+    var id = function (context, bindings){
+        var bindings;
+        if(arguments[0] == undefined){
+            bindings = arguments[1];
+        } else {
+            bindings = arguments[0];
+        }
+        document.getElementById('pageTitle').innerText = "Id: " + bindings.id;
+        crumbList.splice(3,crumbList.length-3);
+        crumbList.push({ title : "ID "+bindings.id, url : "/project/file/"+bindings.id });
+        document.getElementById('bread').innerHTML =  crumbHtml();
+    };
+
+    router.add('/', index, {});
+    router.add('/project', project, {});
+    router.add('[/project]/file', file, {});
+    router.add('[/project/file]/:id', id, {});
+
+
+    $(document).ready(function(){
+        router.ajaxify(window.document.body);
+        router.call(router.getHash());
+    });
+</script>
+</body>
+</html>

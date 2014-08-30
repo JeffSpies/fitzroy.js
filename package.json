@@ -19,7 +19,7 @@
   },
   "browser": {
     "finch": "./bower_components/finchjs/finch.js",
-    "jquery": "./bower_components/jquery/dist/jquery.js",
+    "jquery": "./bower_components/jquery/jquery.js",
     "history": "./bower_components/history.js/scripts/bundled-uncompressed/html4+html5/native.history.js"
   },
   "browserify-shim": {
@@ -55,7 +55,9 @@
     "example": "examples",
     "test": "tests"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "intern-geezer": "^2.0.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
