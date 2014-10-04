@@ -1,6 +1,6 @@
 {
   "name": "fitzroy.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A History.js based JavaScript router using Finch.js for making single-page websites",
   "keywords": [
     "history",
